@@ -18,4 +18,5 @@ public class OrganizationDo {
     private String phoneNumber;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
+    private Integer status;
 }

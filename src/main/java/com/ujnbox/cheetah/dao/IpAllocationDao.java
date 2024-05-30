@@ -28,7 +28,7 @@ public interface IpAllocationDao {
             WHERE id=#{id}
             """)
     int updatePhoneNumberById(@Param("phoneNumber")String phoneNumber,
-                             @Param("id")Integer id);
+                              @Param("id")Integer id);
 
     @Update("""
             UPDATE ip_allocation
@@ -44,9 +44,11 @@ public interface IpAllocationDao {
             WHERE id=#{id}
             """)
     int updateEndTimeById(@Param("endTime")String endTime,
-                            @Param("id")Integer id);
+                          @Param("id")Integer id);
+
     @Select("""
-            SELECT * FROM ip_allocation
+            SELECT id,network_info_id,ip_address,client_name,phone_number,create_time,update_time,start_time,end_time,status
+            FROM ip_allocation
             WHERE network_info_id=#{networkInfoId}
             """)
     List<IpAllocationDo>getByNetworkInfoId(@Param("networkInfoId")String networkInfoId);

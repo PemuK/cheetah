@@ -20,4 +20,5 @@ public class WorkAmountRecordDo {
     private Integer totalAmount;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
+    private Integer status;
 }

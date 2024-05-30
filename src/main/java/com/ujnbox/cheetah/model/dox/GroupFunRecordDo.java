@@ -17,4 +17,5 @@ public class GroupFunRecordDo {
     private Integer userGroupId;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
+    private Integer status;
 }

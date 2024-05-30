@@ -18,4 +18,5 @@ public class BuildingDo {
     private Integer campus;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
+    private Integer status;
 }

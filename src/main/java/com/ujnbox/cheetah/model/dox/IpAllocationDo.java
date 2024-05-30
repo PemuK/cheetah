@@ -17,8 +17,9 @@ public class IpAllocationDo {
     private String ipAddress;
     private String clientName;
     private String phoneNumber;
-    private LocalDateTime createTime;
-    private LocalDateTime updateTime;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
+    private LocalDateTime createTime;
+    private LocalDateTime updateTime;
+    private Integer status;
 }

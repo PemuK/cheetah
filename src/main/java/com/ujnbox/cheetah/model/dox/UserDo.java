@@ -15,6 +15,13 @@ public class UserDo {
     private Integer id;
     private String username;
     private String password;
+    private String name;
+    private Integer age;
+    private Integer gender;
+    private String phoneNumber;
+    private Integer startYear;
+    private Integer organizationId;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
+    private Integer status;
 }

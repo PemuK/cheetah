@@ -17,4 +17,5 @@ public class MaintTypeDo {
     private Integer workAmount;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
+    private Integer status;
 }

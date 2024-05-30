@@ -23,4 +23,5 @@ public class MaintRecordDo {
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
     private LocalDateTime finishTime;
+    private Integer state;
 }

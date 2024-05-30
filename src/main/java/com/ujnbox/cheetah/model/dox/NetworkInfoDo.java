@@ -19,8 +19,9 @@ public class NetworkInfoDo {
     private String description;
     private String startIp;
     private String endIp;
-    private LocalDateTime createTime;
-    private LocalDateTime updateTime;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
+    private LocalDateTime createTime;
+    private LocalDateTime updateTime;
+    private Integer status;
 }

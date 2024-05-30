@@ -17,4 +17,5 @@ public class ParticipateMaintUserDo {
     private Integer userId;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
+    private Integer status;
 }

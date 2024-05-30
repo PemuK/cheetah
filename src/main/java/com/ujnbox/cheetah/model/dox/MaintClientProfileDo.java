@@ -20,4 +20,5 @@ public class MaintClientProfileDo {
     private Integer buildingId;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
+    private Integer status;
 }
