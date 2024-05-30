@@ -3,6 +3,7 @@ package com.ujnbox.cheetah.dao;
 import com.ujnbox.cheetah.model.dox.IpAllocationDo;
 import org.apache.ibatis.annotations.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Mapper
@@ -35,7 +36,7 @@ public interface IpAllocationDao {
             SET start_time=#{startTime}
             WHERE id=#{id}
             """)
-    int updateStartTimeById(@Param("startTime")String startTime,
+    int updateStartTimeById(@Param("startTime")LocalDateTime startTime,
                             @Param("id")Integer id);
 
     @Update("""
@@ -43,7 +44,7 @@ public interface IpAllocationDao {
             SET end_time=#{endTime}
             WHERE id=#{id}
             """)
-    int updateEndTimeById(@Param("endTime")String endTime,
+    int updateEndTimeById(@Param("endTime") LocalDateTime endTime,
                           @Param("id")Integer id);
 
     @Update("""
