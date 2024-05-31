@@ -82,13 +82,14 @@ public interface UserDao {
     @Select("""
             SELECT id, username, password, name, age, gender, phone_number, start_year, organization_id, create_time, update_time, status 
             FROM `user`
-            WHERE id=#{id}
+            WHERE id=#{id} AND status=1
             """)
     UserDo getById(@Param("id") String id);
 
     @Select("""
             SELECT id, username, password, name, age, gender, phone_number, start_year, organization_id, create_time, update_time, status 
-            FROM `user`
+            FROM `user` 
+            WHERE status=1
             """)
     List<UserDo> getAllUserInfo();
 }

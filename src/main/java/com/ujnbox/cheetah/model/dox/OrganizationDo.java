@@ -14,8 +14,6 @@ import java.time.LocalDateTime;
 public class OrganizationDo {
     private Integer id;
     private String organizationName;
-    private String responsiblePerson;
-    private String phoneNumber;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
     private Integer status;

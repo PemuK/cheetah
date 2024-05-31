@@ -67,13 +67,14 @@ public interface MaintRecordDao {
     @Select("""
             SELECT id, client_id, adder_id, reporter_id, maint_type, maint_description, location_description, status, create_time, update_time, finish_time, state
             FROM maint_record
-            WHERE status=#{status}
+            WHERE status=#{status} AND state=1
             """)
     List<MaintRecordDo> getByStatus(@Param("status") Integer status);
 
     @Select("""
             SELECT id, client_id, adder_id, reporter_id, maint_type, maint_description, location_description, status, create_time, update_time, finish_time, state
-            FROM maint_record
+            FROM maint_record 
+            WHERE state=1
             """)
-    List<MaintRecordDo> getAllRecordInfo();
+    List<MaintRecordDo> getAll();
 }
