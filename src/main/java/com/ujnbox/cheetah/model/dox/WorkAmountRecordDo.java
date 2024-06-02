@@ -14,10 +14,7 @@ import java.time.LocalDateTime;
 public class WorkAmountRecordDo {
     private Integer id;
     private Integer userId;
-    private Integer weekAmount;
-    private Integer mountAmount;
-    private Integer quarterAmount;
-    private Integer totalAmount;
+    private Integer amount;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
     private Integer status;
