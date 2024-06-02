@@ -33,13 +33,15 @@ public interface BuildingDao {
 
     @Select("""
             SELECT id,building_name,type,campus,create_time,update_time,status FROM building
-            WHERE building_name LIKE CONCAT('%',#{term}, '%') AND status=1
+            WHERE building_name LIKE CONCAT('%',#{term}, '%') AND status=#{status}
             """)
-    List<BuildingDo> listByBuildingName(@Param("term") String term);
+    List<BuildingDo> listByBuildingNameAndStatus(@Param("term") String term,
+                                                 @Param("status") Integer status);
 
     @Select("""
             SELECT id,building_name,type,campus,create_time,update_time,status FROM building
-            WHERE id=#{id} AND status=1
+            WHERE id=#{id} AND status=#{status}
             """)
-    BuildingDo getById(@Param("id") String id);
+    BuildingDo getByIdAndStatus(@Param("id") String id,
+                                @Param("status") Integer status);
 }

@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class IpAllocationDo {
+public class IPAllocationDo {
     private Integer id;
     private Integer networkInfoId;
     private String ipAddress;

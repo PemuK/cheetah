@@ -27,23 +27,24 @@ public interface WorkAmountRecordDao {
                          @Param("id") Integer id);
 
     @Select("""
-            SELECT user_id, week_amount, month_amount, quarter_amount, total_amount, create_time, update_time, status
+            SELECT id,user_id, week_amount, month_amount, quarter_amount, total_amount, create_time, update_time, status
             FROM work_amount_record
-            WHERE id = #{id}
+            WHERE user_id = #{userId}
             """)
-    WorkAmountRecordDo getById(@Param("id") Integer id);
+    WorkAmountRecordDo getByUserId(@Param("userId") Integer userId);
 
     @Select("""
-            SELECT user_id, week_amount, month_amount, quarter_amount, total_amount, create_time, update_time, status
+            SELECT id,user_id, week_amount, month_amount, quarter_amount, total_amount, create_time, update_time, status
             FROM work_amount_record
-            WHERE create_time = #{time} AND status=1
+            WHERE create_time = #{time} AND status=#{status}
             """)
-    List<WorkAmountRecordDo> getByTime(@Param("time") LocalDateTime time);
+    List<WorkAmountRecordDo> listByTimeAndStatus(@Param("time") LocalDateTime time,
+                                                 @Param("status") Integer status);
 
     @Select("""
-            SELECT user_id, week_amount, month_amount, quarter_amount, total_amount, create_time, update_time, status
+            SELECT id,user_id, week_amount, month_amount, quarter_amount, total_amount, create_time, update_time, status
             FROM work_amount_record
-            WHERE status=1
+            WHERE status=#{status}
             """)
-    List<WorkAmountRecordDo> getAll();
+    List<WorkAmountRecordDo> listByStatus(@Param("status") Integer status);
 }

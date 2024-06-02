@@ -1,13 +1,13 @@
 package com.ujnbox.cheetah.dao;
 
-import com.ujnbox.cheetah.model.dox.IpAllocationDo;
+import com.ujnbox.cheetah.model.dox.IPAllocationDo;
 import org.apache.ibatis.annotations.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Mapper
-public interface IpAllocationDao {
+public interface IPAllocationDao {
     @Insert("""
             INSERT INTO ip_allocation(network_info_id,ip_address)
             VALUES(#{networkInfoId},#{ipAddress})
@@ -58,9 +58,10 @@ public interface IpAllocationDao {
     @Select("""
             SELECT id,network_info_id,ip_address,client_name,phone_number,create_time,update_time,start_time,end_time,status
             FROM ip_allocation
-            WHERE network_info_id=#{networkInfoId} AND status=1
+            WHERE network_info_id=#{networkInfoId} AND status=#{status}
             """)
-    List<IpAllocationDo> getByNetworkInfoId(@Param("networkInfoId") Integer networkInfoId);
+    List<IPAllocationDo> listByNetworkInfoIdAndStatus(@Param("networkInfoId") Integer networkInfoId,
+                                                      @Param("status") Integer status);
 
 
 }

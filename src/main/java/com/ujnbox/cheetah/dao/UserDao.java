@@ -44,7 +44,7 @@ public interface UserDao {
             SET age=#{age}
             WHERE id=#{id}
             """)
-    int updateAgeById(@Param("age") int age,
+    int updateAgeById(@Param("age") Integer age,
                       @Param("id") String id);
 
     @Update("""
@@ -68,7 +68,7 @@ public interface UserDao {
             SET start_year=#{startYear}
             WHERE id=#{id}
             """)
-    int updateStartYearById(@Param("startYear") int startYear,
+    int updateStartYearById(@Param("startYear") Integer startYear,
                             @Param("id") String id);
 
     @Update("""
@@ -76,20 +76,21 @@ public interface UserDao {
             SET status=#{status}
             WHERE id=#{id}
             """)
-    int updateUserStatusById(@Param("status") int status,
+    int updateUserStatusById(@Param("status") Integer status,
                              @Param("id") String id);
 
     @Select("""
             SELECT id, username, password, name, age, gender, phone_number, start_year, organization_id, create_time, update_time, status 
             FROM `user`
-            WHERE id=#{id} AND status=1
+            WHERE id=#{id} AND status=#{status}
             """)
-    UserDo getById(@Param("id") String id);
+    UserDo getByIdAndStatus(@Param("id") Integer id,
+                   @Param("status") Integer status);
 
     @Select("""
             SELECT id, username, password, name, age, gender, phone_number, start_year, organization_id, create_time, update_time, status 
             FROM `user` 
-            WHERE status=1
+            WHERE status=#{status}
             """)
-    List<UserDo> getAllUserInfo();
+    List<UserDo> listByStatus(@Param("status")Integer status);
 }

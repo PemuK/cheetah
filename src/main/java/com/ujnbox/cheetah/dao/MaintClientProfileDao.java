@@ -57,7 +57,8 @@ public interface MaintClientProfileDao {
     @Select("""
             SELECT id, client_name, phone_number, unit, room, building_id, create_time, update_time, status
             FROM maint_client_profile
-            WHERE id=#{id} AND status=1
+            WHERE id=#{id} AND status=#{status}
             """)
-    MaintClientProfileDo getById(@Param("id") Integer id);
+    MaintClientProfileDo getByIdAndStatus(@Param("id") Integer id,
+                                          @Param("status") Integer status);
 }

@@ -27,7 +27,7 @@ public interface MaintTypeDao {
             SET work_amount=#{workAmount}
             WHERE id=#{id}
             """)
-    int updateWorkAmountById(@Param("workAmount") String workAmount,
+    int updateWorkAmountById(@Param("workAmount") Integer workAmount,
                              @Param("id") Integer id);
 
     @Update("""
@@ -41,7 +41,7 @@ public interface MaintTypeDao {
     @Select("""
             SELECT id,type_name,work_amount,create_time,update_time,status
             FROM maint_type 
-             WHERE status=1
+             WHERE status=#{status}
             """)
-    List<MaintTypeDo> getAll();
+    List<MaintTypeDo> listByStatus(@Param("status") Integer status);
 }

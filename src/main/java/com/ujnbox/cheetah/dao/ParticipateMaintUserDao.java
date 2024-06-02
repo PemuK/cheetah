@@ -11,8 +11,8 @@ public interface ParticipateMaintUserDao {
             INSERT INTO participate_maint_user (maintenance_record_id, user_id)
             VALUES (#{maintenanceRecordId}, #{userId})
             """)
-    int insert(@Param("maintenanceRecordId")Integer maintenanceRecordId,
-               @Param("userId")Integer userId);
+    int insert(@Param("maintenanceRecordId") Integer maintenanceRecordId,
+               @Param("userId") Integer userId);
 
     @Update("""
             UPDATE participate_maint_user
@@ -25,14 +25,15 @@ public interface ParticipateMaintUserDao {
     @Select("""
             SELECT id, maintenance_record_id, user_id, create_time, update_time, status
             FROM participate_maint_user
-            WHERE id = #{id} AND status = 1
+            WHERE id = #{id} AND status = #{status}
             """)
-    ParticipateMaintUserDo getById(@Param("id") Integer id);
+    ParticipateMaintUserDo getByIdAndStatus(@Param("id") Integer id,
+                                            @Param("status") Integer status);
 
     @Select("""
             SELECT id, maintenance_record_id, user_id, create_time, update_time, status
             FROM participate_maint_user
-            WHERE status = 1
+            WHERE status = #{status}
             """)
-    List<ParticipateMaintUserDo> getAll();
+    List<ParticipateMaintUserDo> listByStatus(@Param("status") Integer status);
 }

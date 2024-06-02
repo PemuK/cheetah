@@ -33,14 +33,15 @@ public interface OrganizationDao {
     @Select("""
             SELECT id, organization_name, create_time, update_time, status
             FROM organization
-            WHERE id = #{id} AND status = 1
+            WHERE id = #{id} AND status = #{status}
             """)
-    OrganizationDo getById(@Param("id") Integer id);
+    OrganizationDo getByIdAndStatus(@Param("id") Integer id,
+                           @Param("status") Integer status);
 
     @Select("""
             SELECT id, organization_name, create_time, update_time, status
             FROM organization 
-            WHERE status = 1
+            WHERE status = #{status}
             """)
-    List<OrganizationDo> getAll();
+    List<OrganizationDo> listByStatus(@Param("status") Integer status);
 }

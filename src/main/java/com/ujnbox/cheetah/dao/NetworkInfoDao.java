@@ -52,14 +52,15 @@ public interface NetworkInfoDao {
     @Select("""
             SELECT id, organization_id, gateway_ip, subnet_mask, description, start_time, end_time, status, create_time, update_time
             FROM network_info 
-            WHERE status = 1
+            WHERE status = #{status}
             """)
-    List<NetworkInfoDo> getAll();
+    List<NetworkInfoDo> listByStatus(@Param("status") Integer status);
 
     @Select("""
             SELECT id, organization_id, gateway_ip, subnet_mask, description, start_time, end_time, status, create_time, update_time
             FROM network_info
-            WHERE organization_id = #{organizationId} AND status = 1
+            WHERE organization_id = #{organizationId} AND status = #{status}
             """)
-    List<NetworkInfoDo> listNetworkInfoByOrganizationId(@Param("organizationId") Integer organizationId);
+    List<NetworkInfoDo> listByOrganizationIdAndStatus(@Param("organizationId") Integer organizationId,
+                                                                 @Param("status") Integer status);
 }
