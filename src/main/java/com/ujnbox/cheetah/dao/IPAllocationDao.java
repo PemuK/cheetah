@@ -12,8 +12,8 @@ public interface IPAllocationDao {
             INSERT INTO ip_allocation(network_info_id,ip_address)
             VALUES(#{networkInfoId},#{ipAddress})
             """)
-    int insert(@Param("networkInfoId") Integer networkInfoId,
-               @Param("ipAddress") String ipAddress);
+    @Options(useGeneratedKeys = true, keyProperty = "id")
+    int insert(IPAllocationDo ipAllocationDo);
 
     @Update("""
             UPDATE ip_allocation

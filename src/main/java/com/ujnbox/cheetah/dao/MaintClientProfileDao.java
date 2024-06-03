@@ -7,12 +7,10 @@ import org.apache.ibatis.annotations.*;
 public interface MaintClientProfileDao {
     @Insert("""
             INSERT INTO maint_client_profile(client_name, phone_number, unit, room, building_id)
-            VALUES(#{clientName}, #{phoneNumber}, #{room}, #{buildingId})
+            VALUES(#{clientName}, #{phoneNumber}, #{unit}, #{room}, #{buildingId})
             """)
-    int insert(@Param("clientName") String clientName,
-               @Param("phoneNumber") String phoneNumber,
-               @Param("room") String room,
-               @Param("buildingId") Integer buildingId);
+    @Options(useGeneratedKeys = true, keyProperty = "id")
+    int insert(MaintClientProfileDo maintClientProfileDo);
 
     @Update("""
             UPDATE maint_client_profile

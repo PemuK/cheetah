@@ -13,9 +13,8 @@ public interface NetworkInfoDao {
             INSERT INTO network_info (organization_id, gateway_ip, subnet_mask)
             VALUES (#{organizationId}, #{gatewayIp}, #{subnetMask})
             """)
-    int insert(@Param("organizationId") Integer organizationId,
-               @Param("gatewayIp") String gatewayIp,
-               @Param("subnetMask") String subnetMask);
+    @Options(useGeneratedKeys = true, keyProperty = "id")
+    int insert(NetworkInfoDo networkInfoDo);
 
     @Update("""
             UPDATE network_info

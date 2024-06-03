@@ -11,9 +11,8 @@ public interface UserDao {
             INSERT INTO `user`(username, password, organization_id)
             VALUES (#{username}, #{password}, #{organizationId})
             """)
-    int insert(@Param("username") String username,
-               @Param("password") String password,
-               @Param("organizationId") String organizationId);
+    @Options(useGeneratedKeys = true, keyProperty = "id")
+    int insert(UserDo userDo);
 
     @Update("""
             UPDATE `user`

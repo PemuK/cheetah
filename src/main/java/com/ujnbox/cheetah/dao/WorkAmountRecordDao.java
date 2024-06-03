@@ -12,8 +12,8 @@ public interface WorkAmountRecordDao {
             INSERT INTO work_amount_record(user_id,amount)
             VALUES (#{userId}, #{amount})
             """)
-    int insert(@Param("userId") Integer userId,
-               @Param("amount") Integer weekAmount);
+    @Options(useGeneratedKeys = true, keyProperty = "id")
+    int insert(WorkAmountRecordDo workAmountRecordDo);
 
     @Update("""
             UPDATE work_amount_record

@@ -11,9 +11,8 @@ public interface BuildingDao {
             INSERT INTO building(building_name,type,campus)
             VALUES (#{buildingName},#{type},#{campus})
             """)
-    int insert(@Param("buildingName") String buildingName,
-               @Param("type") Integer type,
-               @Param("campus") Integer campus);
+    @Options(useGeneratedKeys = true, keyProperty = "id")
+    int insert(BuildingDo buildingDo);
 
     @Update("""
             UPDATE building

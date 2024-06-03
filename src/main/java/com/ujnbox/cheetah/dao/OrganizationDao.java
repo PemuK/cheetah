@@ -12,7 +12,8 @@ public interface OrganizationDao {
             INSERT INTO organization (organization_name)
             VALUES (#{organizationName})
             """)
-    int insert(@Param("organizationName") String organizationName);
+    @Options(useGeneratedKeys = true, keyProperty = "id")
+    int insert(OrganizationDo organizationDo);
 
     @Update("""
             UPDATE organization

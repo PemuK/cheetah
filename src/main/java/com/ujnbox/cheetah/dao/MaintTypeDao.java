@@ -11,8 +11,8 @@ public interface MaintTypeDao {
             INSERT INTO maint_type(type_name,work_amount)
             VALUES (#{typeName},#{workAmount})
             """)
-    int insert(@Param("typeName") String typeName,
-               @Param("workAmount") Integer workAmount);
+    @Options(useGeneratedKeys = true, keyProperty = "id")
+    int insert(MaintTypeDo maintTypeDo);
 
     @Update("""
             UPDATE maint_type

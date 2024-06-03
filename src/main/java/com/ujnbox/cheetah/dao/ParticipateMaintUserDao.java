@@ -11,8 +11,8 @@ public interface ParticipateMaintUserDao {
             INSERT INTO participate_maint_user (maintenance_record_id, user_id)
             VALUES (#{maintenanceRecordId}, #{userId})
             """)
-    int insert(@Param("maintenanceRecordId") Integer maintenanceRecordId,
-               @Param("userId") Integer userId);
+    @Options(useGeneratedKeys = true, keyProperty = "id")
+    int insert(ParticipateMaintUserDo participateMaintUserDo);
 
     @Update("""
             UPDATE participate_maint_user

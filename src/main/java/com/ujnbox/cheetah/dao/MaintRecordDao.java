@@ -8,13 +8,11 @@ import java.util.List;
 @Mapper
 public interface MaintRecordDao {
     @Insert("""
-            INSERT INTO maint_record(client_id, adder_id, maint_type, maint_description)
-            VALUES(#{clientId}, #{adderId}, #{maintType}, #{maintDescription})
+            INSERT INTO maint_record(client_id, adder_id, maint_type, maint_description,location_description)
+            VALUES(#{clientId}, #{adderId}, #{maintType}, #{maintDescription},#{locationDescription})
             """)
-    int insert(@Param("clientId") Integer clientId,
-               @Param("adderId") Integer adderId,
-               @Param("maintType") Integer maintType,
-               @Param("maintDescription") String maintDescription);
+    @Options(useGeneratedKeys = true, keyProperty = "id")
+    int insert(MaintRecordDo maintRecordDo);
 
     @Update("""
             UPDATE maint_record
