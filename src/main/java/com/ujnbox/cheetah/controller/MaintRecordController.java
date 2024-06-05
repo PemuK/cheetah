@@ -2,11 +2,15 @@ package com.ujnbox.cheetah.controller;
 
 import com.ujnbox.cheetah.common.model.ErrorCodeEnum;
 import com.ujnbox.cheetah.common.model.ResponseMsg;
+import com.ujnbox.cheetah.model.vo.MaintRecordVo;
 import com.ujnbox.cheetah.service.MaintRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 import static com.ujnbox.cheetah.common.model.ErrorCodeEnum.MAINT_RECORD_INSERT_FAILED;
+import static com.ujnbox.cheetah.common.model.ErrorCodeEnum.MAINT_RECORD_QUERY_FAILED;
 
 /**
  * MaintRecordController 处理维护记录相关请求的控制器类。
@@ -52,5 +56,22 @@ public class MaintRecordController {
         } else {
             return ResponseMsg.error(MAINT_RECORD_INSERT_FAILED);
         }
+    }
+
+    /**
+     * 根据完成情况和状态查询维护记录列表。
+     *
+     * @param status 完成情况。
+     * @param state  状态。
+     * @return 响应消息对象，包含操作的结果或维护记录列表。
+     */
+    @PostMapping("/list")
+    public ResponseMsg<?> listByStatusAndState(@RequestParam(value = "status") Integer status,
+                                               @RequestParam(value = "state", required = false, defaultValue = "1") Integer state) {
+        // 调用维护记录服务方法获取维护记录列表
+        List<MaintRecordVo> maintRecordVos = maintRecordService.listByStatusAndState(status, state);
+
+        // 根据服务方法的返回值返回对应的响应消息
+        return maintRecordVos != null ? ResponseMsg.success(maintRecordVos) : ResponseMsg.error(MAINT_RECORD_QUERY_FAILED);
     }
 }
