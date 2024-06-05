@@ -25,5 +25,4 @@ public class MaintRecordVo {
     private String locationDescription;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
-    private LocalDateTime finishTime;
 }

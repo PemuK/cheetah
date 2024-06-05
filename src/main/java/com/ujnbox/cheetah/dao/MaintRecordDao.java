@@ -3,6 +3,7 @@ package com.ujnbox.cheetah.dao;
 import com.ujnbox.cheetah.model.dox.MaintRecordDo;
 import org.apache.ibatis.annotations.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Mapper
@@ -62,8 +63,16 @@ public interface MaintRecordDao {
     int updateReporterIdById(@Param("reporterId") Integer reporterId,
                              @Param("id") Integer id);
 
+    @Update("""
+            UPDATE maint_record
+            SET note=#{note}
+            WHERE id=#{id}
+            """)
+    int updateNoteById(@Param("note") String note,
+                       @Param("id") Integer id);
+
     @Select("""
-            SELECT id, client_id, adder_id, reporter_id, maint_type, maint_description, location_description, status, create_time, update_time, finish_time, state
+            SELECT id, client_id, adder_id, reporter_id, maint_type, maint_description, location_description, status, create_time, update_time, state
             FROM maint_record
             WHERE status=#{status} AND state=#{state}
             """)
@@ -71,7 +80,7 @@ public interface MaintRecordDao {
                                              @Param("state") Integer state);
 
     @Select("""
-            SELECT id, client_id, adder_id, reporter_id, maint_type, maint_description, location_description, status, create_time, update_time, finish_time, state
+            SELECT id, client_id, adder_id, reporter_id, maint_type, maint_description, location_description, status, create_time, update_time, state
             FROM maint_record 
             WHERE state=#{state}
             """)

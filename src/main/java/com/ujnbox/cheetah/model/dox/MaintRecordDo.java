@@ -19,9 +19,9 @@ public class MaintRecordDo {
     private Integer maintType;
     private String maintDescription;
     private String locationDescription;
+    private String note;
     private Integer status;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
-    private LocalDateTime finishTime;
     private Integer state;
 }
