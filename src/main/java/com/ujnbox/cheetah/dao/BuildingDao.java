@@ -41,6 +41,6 @@ public interface BuildingDao {
             SELECT id,building_name,type,campus,create_time,update_time,status FROM building
             WHERE id=#{id} AND status=#{status}
             """)
-    BuildingDo getByIdAndStatus(@Param("id") String id,
+    BuildingDo getByIdAndStatus(@Param("id") Integer id,
                                 @Param("status") Integer status);
 }
