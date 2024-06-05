@@ -9,4 +9,6 @@ public interface MaintRecordService {
     public boolean generateNewRecord(String clientName, String phoneNumber, String unit, String room, Integer buildingId, Integer adderId, Integer maintType, String maintDescription, String locationDescription);
 
     public List<MaintRecordVo> listByStatusAndState(Integer status, Integer state);
+
+    public boolean report(Integer maintRecordId, Integer reporterId, String note, Integer status);
 }

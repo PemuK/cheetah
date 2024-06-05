@@ -16,6 +16,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 /**
@@ -110,7 +112,6 @@ public class MaintRecordServiceImpl implements MaintRecordService {
                         .locationDescription(maintRecordDo.getLocationDescription())
                         .createTime(maintRecordDo.getCreateTime())
                         .updateTime(maintRecordDo.getUpdateTime())
-                        .finishTime(maintRecordDo.getFinishTime())
                         .build();
 
                 maintRecordVos.add(maintRecordVo);
@@ -119,4 +120,66 @@ public class MaintRecordServiceImpl implements MaintRecordService {
         return maintRecordVos;
     }
 
+
+    /**
+     * 提交填报信息并更新数据库
+     *
+     * @param maintRecordId 维护记录ID
+     * @param reporterId    填报人ID
+     * @param note          备注信息
+     * @param status        状态信息
+     * @return 如果更新成功返回true，否则返回false
+     */
+    @Override
+    public boolean report(Integer maintRecordId, Integer reporterId, String note, Integer status) {
+
+
+        // 记录填报备注信息
+        logger.info("填报维护id：{}，填报人id：{}，备注：{}，更改完成状态：{}", maintRecordId, reporterId, note, status);
+
+        // 更新填报备注
+        boolean noteUpdateSuccess = updateNote(maintRecordId, note);
+
+        // 更新填报人信息
+        boolean reporterIdUpdateSuccess = updateReporterId(maintRecordId, reporterId);
+
+        // 更新填报状态信息
+        boolean statusUpdateSuccess = updateStatus(maintRecordId, status);
+
+        // 返回更新结果
+        return noteUpdateSuccess && statusUpdateSuccess && reporterIdUpdateSuccess;
+    }
+
+    /**
+     * 更新维护记录状态
+     *
+     * @param maintRecordId 维护记录ID
+     * @param status        状态信息
+     * @return 如果更新成功返回true，否则返回false
+     */
+    private boolean updateStatus(Integer maintRecordId, Integer status) {
+        return maintRecordDao.updateStatusById(status, maintRecordId) > 0;
+    }
+
+    /**
+     * 更新填报人信息
+     *
+     * @param maintRecordId 维护记录ID
+     * @param reporterId    填报人ID
+     * @return 如果更新成功返回true，否则返回false
+     */
+    private boolean updateReporterId(Integer maintRecordId, Integer reporterId) {
+        return maintRecordDao.updateReporterIdById(reporterId, maintRecordId) > 0;
+    }
+
+    /**
+     * 更新填报备注信息
+     *
+     * @param maintRecordId 维护记录ID
+     * @param note          备注信息
+     * @return 如果更新成功返回true，否则返回false
+     */
+    private boolean updateNote(Integer maintRecordId, String note) {
+        return maintRecordDao.updateNoteById(note, maintRecordId) > 0;
+    }
 }

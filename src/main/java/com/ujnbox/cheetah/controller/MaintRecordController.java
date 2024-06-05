@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.ujnbox.cheetah.common.model.ErrorCodeEnum.MAINT_RECORD_INSERT_FAILED;
-import static com.ujnbox.cheetah.common.model.ErrorCodeEnum.MAINT_RECORD_QUERY_FAILED;
+import static com.ujnbox.cheetah.common.model.ErrorCodeEnum.*;
 
 /**
  * MaintRecordController 处理维护记录相关请求的控制器类。
@@ -73,5 +72,19 @@ public class MaintRecordController {
 
         // 根据服务方法的返回值返回对应的响应消息
         return maintRecordVos != null ? ResponseMsg.success(maintRecordVos) : ResponseMsg.error(MAINT_RECORD_QUERY_FAILED);
+    }
+
+    @PostMapping("/report")
+    public ResponseMsg maintReport(@RequestParam(value = "maintRecordId") Integer maintRecordId,
+                                   @RequestParam(value = "reporterId") Integer reporterId,
+                                   @RequestParam(value = "note") String note,
+                                   @RequestParam(value = "status", required = false, defaultValue = "1") Integer status) {
+
+        boolean success = maintRecordService.report(maintRecordId, reporterId, note, status);
+        if (success) {
+            return ResponseMsg.success();
+        } else {
+            return ResponseMsg.error(MAINT_RECORD_REPORT_FAILED);
+        }
     }
 }
