@@ -20,7 +20,7 @@ public interface UserDao {
             WHERE id=#{id}
             """)
     int updateUsernameById(@Param("username") String username,
-                           @Param("id") String id);
+                           @Param("id") Integer id);
 
     @Update("""
             UPDATE `user`
@@ -28,7 +28,7 @@ public interface UserDao {
             WHERE id=#{id}
             """)
     int updatePasswordById(@Param("password") String password,
-                           @Param("id") String id);
+                           @Param("id") Integer id);
 
     @Update("""
             UPDATE `user`
@@ -36,7 +36,7 @@ public interface UserDao {
             WHERE id=#{id}
             """)
     int updateNameById(@Param("name") String name,
-                       @Param("id") String id);
+                       @Param("id") Integer id);
 
     @Update("""
             UPDATE `user`
@@ -44,7 +44,7 @@ public interface UserDao {
             WHERE id=#{id}
             """)
     int updateAgeById(@Param("age") Integer age,
-                      @Param("id") String id);
+                      @Param("id") Integer id);
 
     @Update("""
             UPDATE `user`
@@ -52,7 +52,7 @@ public interface UserDao {
             WHERE id=#{id}
             """)
     int updateGenderById(@Param("gender") String gender,
-                         @Param("id") String id);
+                         @Param("id") Integer id);
 
     @Update("""
             UPDATE `user`
@@ -60,7 +60,7 @@ public interface UserDao {
             WHERE id=#{id}
             """)
     int updatePhoneNumberById(@Param("phoneNumber") String phoneNumber,
-                              @Param("id") String id);
+                              @Param("id") Integer id);
 
     @Update("""
             UPDATE `user`
@@ -68,7 +68,7 @@ public interface UserDao {
             WHERE id=#{id}
             """)
     int updateStartYearById(@Param("startYear") Integer startYear,
-                            @Param("id") String id);
+                            @Param("id") Integer id);
 
     @Update("""
             UPDATE `user`
@@ -76,7 +76,7 @@ public interface UserDao {
             WHERE id=#{id}
             """)
     int updateUserStatusById(@Param("status") Integer status,
-                             @Param("id") String id);
+                             @Param("id") Integer id);
 
     @Select("""
             SELECT id, username, password, name, age, gender, phone_number, start_year, organization_id, create_time, update_time, status 
