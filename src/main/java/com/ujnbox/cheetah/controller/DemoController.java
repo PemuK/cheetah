@@ -1,6 +1,7 @@
 package com.ujnbox.cheetah.controller;
 
 import com.ujnbox.cheetah.common.model.ErrorCodeEnum;
+import com.ujnbox.cheetah.common.model.MsuException;
 import com.ujnbox.cheetah.common.model.ResponseMsg;
 import com.ujnbox.cheetah.service.IDemoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ public class DemoController {
             return ResponseMsg.success();
         }
 
-        return ResponseMsg.error(ErrorCodeEnum.SYSTEM_ERROR);
+//        return ResponseMsg.error(ErrorCodeEnum.SYSTEM_ERROR);
+        throw new MsuException(ErrorCodeEnum.SYSTEM_ERROR);
     }
+
 }
