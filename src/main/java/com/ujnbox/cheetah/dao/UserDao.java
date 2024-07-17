@@ -84,12 +84,21 @@ public interface UserDao {
             WHERE id=#{id} AND status=#{status}
             """)
     UserDo getByIdAndStatus(@Param("id") Integer id,
-                   @Param("status") Integer status);
+                            @Param("status") Integer status);
 
     @Select("""
             SELECT id, username, password, name, age, gender, phone_number, start_year, organization_id, create_time, update_time, status 
             FROM `user` 
             WHERE status=#{status}
             """)
-    List<UserDo> listByStatus(@Param("status")Integer status);
+    List<UserDo> listByStatus(@Param("status") Integer status);
+
+    @Select("""
+            SELECT id, username, password, name, age, gender, phone_number, start_year, organization_id, create_time, update_time, status 
+            FROM `user`
+            WHERE username=#{username} AND password=#{password}
+            """)
+    UserDo login(@Param("username") String username,
+                 @Param("password") String password);
+
 }

@@ -11,7 +11,8 @@ public enum ErrorCodeEnum {
     // 1000-2000 范围内的维护记录相关错误代码
     MAINT_RECORD_INSERT_FAILED(1001, "维护记录插入失败"),
     MAINT_RECORD_QUERY_FAILED(1002, "查询维护记录失败"),
-    MAINT_RECORD_REPORT_FAILED(1003, "填报维护记录失败");
+    MAINT_RECORD_REPORT_FAILED(1003, "填报维护记录失败"),
+    LOGIN_ERROR(2000,"登陆失败" );
 
     private final int code;
     private final String message;
