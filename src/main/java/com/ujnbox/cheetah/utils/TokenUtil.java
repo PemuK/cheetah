@@ -1,8 +1,11 @@
 package com.ujnbox.cheetah.utils;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Base64;
 import java.util.UUID;
 
+@Component
 public class TokenUtil {
 
     // 生成一个简单的Token

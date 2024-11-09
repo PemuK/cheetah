@@ -15,7 +15,7 @@ public class MaintRecordDo {
     private Integer id;
     private Integer clientId;
     private Integer adderId;
-    private Integer reportId;
+    private Integer reporterId;
     private Integer maintType;
     private String maintDescription;
     private String locationDescription;
@@ -24,4 +24,6 @@ public class MaintRecordDo {
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
     private Integer state;
+    private LocalDateTime finishTime;
+    private String completer;
 }

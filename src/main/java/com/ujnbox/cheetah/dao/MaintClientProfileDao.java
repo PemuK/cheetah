@@ -52,6 +52,17 @@ public interface MaintClientProfileDao {
     int updateStatusById(@Param("status") Integer status,
                          @Param("id") Integer id);
 
+    @Update("""
+            UPDATE maint_client_profile
+            SET client_name=#{clientName},
+                phone_number=#{phoneNumber},
+                unit=#{unit},
+                room=#{room},
+                building_id=#{buildingId}
+            WHERE id=#{id}
+            """)
+    int updateById(MaintClientProfileDo maintClientProfileDo);
+
     @Select("""
             SELECT id, client_name, phone_number, unit, room, building_id, create_time, update_time, status
             FROM maint_client_profile

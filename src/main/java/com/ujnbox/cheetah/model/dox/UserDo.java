@@ -16,8 +16,7 @@ public class UserDo {
     private String username;
     private String password;
     private String name;
-    private Integer age;
-    private Integer gender;
+    private Integer location;
     private String phoneNumber;
     private Integer startYear;
     private Integer organizationId;

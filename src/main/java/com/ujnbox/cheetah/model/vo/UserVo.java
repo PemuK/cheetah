@@ -14,14 +14,13 @@ public class UserVo {
     private Integer id;
     private String username;
     private String name;
-    private Integer age;
-    private Integer gender;
     private String phoneNumber;
     private Integer startYear;
     private Integer organizationId;
-    private String organization;
+    private String organizationName;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
+    private String token;
     private Integer status;
-
+    private String permission;
 }

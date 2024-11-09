@@ -30,6 +30,21 @@ public interface BuildingDao {
     int updateCampusById(@Param("campus") Integer campus,
                          @Param("id") Integer id);
 
+    @Update("""
+            UPDATE building
+            SET campus=#{campus},type=#{type},building_name=#{buildingName}
+            WHERE id=#{id} 
+            """)
+    int updateById(BuildingDo buildingDo);
+
+    @Update("""
+            UPDATE building
+            SET status=#{status}
+            WHERE id=#{id} 
+            """)
+    int updateStatusById(@Param("id") Integer id,
+                         @Param("status") Integer status);
+
     @Select("""
             SELECT id,building_name,type,campus,create_time,update_time,status FROM building
             WHERE building_name LIKE CONCAT('%',#{term}, '%') AND status=#{status}
@@ -43,4 +58,19 @@ public interface BuildingDao {
             """)
     BuildingDo getByIdAndStatus(@Param("id") Integer id,
                                 @Param("status") Integer status);
+
+    @Select("""
+            SELECT id,building_name,type,campus,create_time,update_time,status FROM building
+            WHERE status=#{status}
+            """)
+    List<BuildingDo> listByStatus(@Param("status") Integer status);
+
+    @Select("""
+        SELECT id, building_name, type, campus, create_time, update_time, status
+        FROM building
+        WHERE building_name LIKE CONCAT('%', #{buildingName}, '%') AND status = #{status}
+        """)
+    List<BuildingDo> listByName(@Param("buildingName") String buildingName,
+                                @Param("status") Integer status);
+
 }

@@ -30,6 +30,14 @@ public interface MaintTypeDao {
     int updateWorkAmountById(@Param("workAmount") Integer workAmount,
                              @Param("id") Integer id);
 
+
+    @Update("""
+            UPDATE maint_type
+            SET work_amount=#{workAmount},type_name=#{typeName}
+            WHERE id=#{id}
+            """)
+    int updateById(MaintTypeDo maintTypeDo);
+
     @Update("""
             UPDATE maint_type
             SET status=#{status}
@@ -44,4 +52,18 @@ public interface MaintTypeDao {
              WHERE status=#{status}
             """)
     List<MaintTypeDo> listByStatus(@Param("status") Integer status);
+
+    @Select("""
+            SELECT id,type_name,work_amount,create_time,update_time,status
+            FROM maint_type
+             WHERE status=#{status} AND id=#{id}
+            """)
+    MaintTypeDo getByIdAndStatus(@Param("id") Integer id,
+                                 @Param("status") Integer status);
+
+    @Select("""
+            SELECT id,type_name,work_amount,create_time,update_time,status
+            FROM maint_type 
+            """)
+    List<MaintTypeDo> list();
 }
