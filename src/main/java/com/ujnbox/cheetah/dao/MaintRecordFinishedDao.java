@@ -100,14 +100,15 @@ public interface MaintRecordFinishedDao {
                                        @Param("state") Integer state);
 
     @Select("""
-            SELECT  id, client_id, client_name,maint_type, maint_type_name, maint_description, location_description, 
-                    status, create_time, finish_time, note,client_name, phone_number, unit, room, building_id, building_name
+            SELECT id, client_id, client_name, maint_type, maint_type_name, maint_description, location_description, 
+                   status, create_time, finish_time, note, client_name, phone_number, unit, room, building_id, building_name
             FROM maint_record_finished
-            WHERE phone_number LIKE  CONCAT('%',#{phoneNumber},'%') AND state=#{state}  
+            WHERE phone_number LIKE CONCAT(#{phoneNumber}, '%') AND state = #{state}  
             ORDER BY finish_time DESC
             """)
     List<MaintRecordVo> listPhoneNumber(@Param("phoneNumber") String phoneNumber,
                                         @Param("state") Integer state);
+
 
     @Select("""
             SELECT id, client_id, adder_id, adder_name, reporter_id, reporter_name, 
