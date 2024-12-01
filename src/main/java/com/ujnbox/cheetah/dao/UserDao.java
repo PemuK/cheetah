@@ -23,10 +23,10 @@ public interface UserDao {
     int updateUsernameById(@Param("username") String username, @Param("id") Integer id);
 
     @Update("""
-        UPDATE `user`
-        SET password = #{newPassword}
-        WHERE id = #{id} AND password = #{oldPassword}
-        """)
+            UPDATE `user`
+            SET password = #{newPassword}
+            WHERE id = #{id} AND password = #{oldPassword}
+            """)
     int updatePasswordById(@Param("oldPassword") String oldPassword,
                            @Param("newPassword") String newPassword,
                            @Param("id") Integer id);
@@ -119,6 +119,13 @@ public interface UserDao {
     @Select("""
             SELECT id, username, password, name, phone_number, start_year, organization_id,organization_name, create_time, update_time, status 
             FROM `user_info` 
+            WHERE state=#{state} AND status>=#{status}
+            """)
+    List<UserVo> listByStateOrdinary(@Param("state") Integer state, @Param("status") Integer status);
+
+    @Select("""
+            SELECT id, username, password, name, phone_number, start_year, organization_id,organization_name, create_time, update_time, status 
+            FROM `user_info` 
             """)
     List<UserVo> list();
 
@@ -126,14 +133,14 @@ public interface UserDao {
             SELECT id, username, password, name, phone_number, start_year, organization_id,organization_name, create_time, update_time, status 
             FROM `user_info` 
             WHERE start_year=#{startYear} AND status<=#{status}
-                        """)
+            """)
     List<UserVo> listByStartYear(@Param("startYear") Integer startYear, @Param("status") Integer status);
 
     @Select("""
             SELECT id, username, password, name, phone_number, start_year, organization_id,organization_name, create_time, update_time, status 
             FROM `user_info` 
             WHERE start_year>=#{startYear} AND state=#{state}
-                        """)
+            """)
     List<UserVo> listByTime(@Param("startYear") Integer startYear,
                             @Param("state") Integer state);
 
@@ -154,14 +161,13 @@ public interface UserDao {
     UserDo login(@Param("username") String username, @Param("password") String password);
 
     @Select("""
-        SELECT DISTINCT start_year 
-        FROM `user` 
-        WHERE state = #{state}
-        AND start_year > 2000
-        """
+            SELECT DISTINCT start_year 
+            FROM `user` 
+            WHERE state = #{state}
+            AND start_year > 2000
+            """
     )
     List<String> listAllStartYears(@Param("state") Integer state);
-
 
 
 }

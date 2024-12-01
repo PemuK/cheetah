@@ -8,9 +8,7 @@ import com.ujnbox.cheetah.model.dox.MaintClientProfileDo;
 import com.ujnbox.cheetah.model.dox.MaintRecordDo;
 import com.ujnbox.cheetah.model.dox.UserDo;
 import com.ujnbox.cheetah.model.vo.MaintRecordVo;
-import com.ujnbox.cheetah.model.vo.WorkAmountVo;
 import com.ujnbox.cheetah.service.MaintRecordService;
-import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +16,10 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.temporal.TemporalAdjusters;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static com.ujnbox.cheetah.common.model.ErrorCodeEnum.PERMISSION_ERROR;
 import static com.ujnbox.cheetah.common.model.ErrorCodeEnum.UPDATE_ERROR;
@@ -314,6 +315,17 @@ public class MaintRecordServiceImpl implements MaintRecordService {
     }
 
     @Override
+    public PageInfo pageByUserId(Integer pageNum, Integer pageSize, Integer userId, Integer state) {
+        String orderBy = "create_time desc";
+        PageHelper.startPage(pageNum, pageSize, orderBy);
+        List<MaintRecordVo> list = maintRecordFinishedDao.listByStateAndId(state, userId);
+
+        toAddCompeleterInfo(list);
+
+        return new PageInfo<>(list);
+    }
+
+    @Override
     public PageInfo pageByDescription(Integer pageNum, Integer pageSize, String description, Integer state) {
         String orderBy = "create_time desc";
         PageHelper.startPage(pageNum, pageSize, orderBy);
@@ -321,6 +333,15 @@ public class MaintRecordServiceImpl implements MaintRecordService {
 
         toAddCompeleterInfo(list);
 
+        return new PageInfo<>(list);
+    }
+
+    @Override
+    public PageInfo pageByIdAndTime(Integer pageNum, Integer pageSize, LocalDateTime startTime, LocalDateTime endTime, Integer userId, Integer state) {
+        String orderBy = "create_time desc";
+        PageHelper.startPage(pageNum, pageSize, orderBy);
+        List<MaintRecordVo> list = maintRecordFinishedDao.listByStateAndIdAndTime(state, startTime, endTime, userId);
+        toAddCompeleterInfo(list);
         return new PageInfo<>(list);
     }
 

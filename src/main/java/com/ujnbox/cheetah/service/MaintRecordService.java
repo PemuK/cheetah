@@ -3,7 +3,6 @@ package com.ujnbox.cheetah.service;
 import com.github.pagehelper.PageInfo;
 import com.ujnbox.cheetah.common.model.ResponseMsg;
 import com.ujnbox.cheetah.model.vo.MaintRecordVo;
-import com.ujnbox.cheetah.model.vo.WorkAmountVo;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -40,9 +39,14 @@ public interface MaintRecordService {
 
     PageInfo pageByMaintType(Integer pageNum, Integer pageSize, Integer typeId, Integer state);
 
+    PageInfo pageByUserId(Integer pageNum, Integer pageSize, Integer userId, Integer state);
+
     PageInfo pageByDescription(Integer pageNum, Integer pageSize, String description, Integer state);
+
+    PageInfo pageByIdAndTime(Integer pageNum, Integer pageSize, LocalDateTime startTime, LocalDateTime endTime, Integer userId, Integer state);
 
     List<MaintRecordVo> listByIdAndMonth(LocalDateTime time, Integer userId, Integer state);
 
     List<MaintRecordVo> listByIdAndTime(LocalDateTime startTime, LocalDateTime endTime, Integer userId, Integer state);
+
 }

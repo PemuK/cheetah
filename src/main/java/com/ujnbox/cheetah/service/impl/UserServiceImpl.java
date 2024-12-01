@@ -14,7 +14,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -25,7 +27,7 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
-    public ResponseMsg<?> addUser(String username, String name, String password, String phoneNumber, Integer startYear, Integer organizationId,Integer status) {
+    public ResponseMsg<?> addUser(String username, String name, String password, String phoneNumber, Integer startYear, Integer organizationId, Integer status) {
         UserDo userDo = UserDo.builder()
                 .username(username)
                 .name(name)
@@ -48,7 +50,7 @@ public class UserServiceImpl implements UserService {
         log.info("[listByStatus] 正在获取状态为 {} 的用户列表", status);
 
         // 根据状态从数据库中获取用户列表
-        List<UserVo> userVos = userDao.listByStatusAndState(status,state);
+        List<UserVo> userVos = userDao.listByStatusAndState(status, state);
 
         return ResponseMsg.success(userVos);
     }
@@ -97,17 +99,37 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public PageInfo<UserVo> pageOrdinary(Integer pageNum, Integer pageSize, Integer state,Integer status) {
+//        log.info("[list] 正在获取所有用户列表");
+//        // 启动分页
+//        String orderBy = "id desc"; // 按照排序字段倒序排序
+//        PageHelper.startPage(pageNum, pageSize, orderBy);
+//        // 从数据库中获取所有用户
+//        List<UserVo> userVos = userDao.listByStateOrdinary(state,status);
+//
+//        // 遍历用户列表，并为每个用户设置权限
+//        for (UserVo userVo : userVos) {
+//            int status = userVo.getStatus(); // 假设 status 对应权限
+//            String permission = PermissionEnum.fromCode(status).getDescription();
+//            userVo.setPermission(permission);
+//        }
+//
+//        PageInfo<UserVo> pageInfo = new PageInfo<>(userVos);
+        return null;
+    }
+
+    @Override
     public List<UserVo> listByState(Integer state) {
         return userDao.listByState(state);
     }
 
     @Override
-    public PageInfo listByNameAndState(Integer pageNum, Integer pageSize,String name, Integer state) {
+    public PageInfo listByNameAndState(Integer pageNum, Integer pageSize, String name, Integer state) {
         // 启动分页
         String orderBy = "id desc"; // 按照排序字段倒序排序
         PageHelper.startPage(pageNum, pageSize, orderBy);
         // 从数据库中获取所有用户
-        List<UserVo> userVos = userDao.listByName(name,state);
+        List<UserVo> userVos = userDao.listByName(name, state);
         PageInfo<UserVo> pageInfo = new PageInfo<>(userVos);
 
         return pageInfo;
@@ -124,7 +146,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Map<String, List<UserVo>> listByStartYear(Integer status,Integer state) {
+    public Map<String, List<UserVo>> listByStartYear(Integer status, Integer state) {
         Map<String, List<UserVo>> userYearMap = new HashMap<>();
         List<String> years = userDao.listAllStartYears(state);
         for (String year : years) {
@@ -139,4 +161,6 @@ public class UserServiceImpl implements UserService {
     public boolean updateStateById(Integer id, Integer state) {
         return userDao.updateStateById(state, id) > 0;
     }
+
+
 }

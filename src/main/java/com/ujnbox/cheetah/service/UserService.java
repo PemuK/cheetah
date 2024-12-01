@@ -27,5 +27,5 @@ public interface UserService {
 
     boolean updateStateById(Integer id, Integer state);
 
-
+    PageInfo<UserVo> pageOrdinary(Integer pageNum, Integer pageSize, Integer state,Integer status);
 }

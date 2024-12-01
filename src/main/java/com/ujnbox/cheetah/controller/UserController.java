@@ -26,6 +26,14 @@ public class UserController {
         return ResponseMsg.success(userService.pageByState(pageNum, pageSize, state));
     }
 
+//    @GetMapping("/ordinary")
+//    public ResponseMsg<?> listOrdinary(@RequestParam(value = "pageNum") Integer pageNum,
+//                                       @RequestParam(value = "pageSize") Integer pageSize,
+//                                       @RequestParam(value = "state", required = false, defaultValue = "1") Integer state,
+//                                       @RequestParam(value = "status", required = false, defaultValue = "2") Integer status) {
+//        return ResponseMsg.success(userService.pageOrdinary(pageNum, pageSize, state));
+//    }
+
     @GetMapping("/name")
     public ResponseMsg<?> listByName(@RequestParam(value = "pageNum") Integer pageNum,
                                      @RequestParam(value = "pageSize") Integer pageSize,

@@ -35,4 +35,5 @@ public class MaintRecordVo {
     private String note;
     private String completer;
     private String completerName;
+    private Integer status;
 }

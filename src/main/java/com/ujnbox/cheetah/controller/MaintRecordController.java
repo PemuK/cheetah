@@ -160,34 +160,54 @@ public class MaintRecordController {
         return pageInfo != null ? ResponseMsg.success(pageInfo) : ResponseMsg.error(MAINT_RECORD_QUERY_FAILED);
     }
 
+    @GetMapping("/page/user")
+    public ResponseMsg<?> pageByUser(@RequestParam(value = "pageNum") Integer pageNum,
+                                     @RequestParam(value = "pageSize") Integer pageSize,
+                                     @RequestParam(value = "userId") Integer userId,
+                                     @RequestParam(value = "state", defaultValue = "1", required = false) Integer state) {
+        PageInfo pageInfo = maintRecordService.pageByUserId(pageNum, pageSize, userId, state);
+        return pageInfo != null ? ResponseMsg.success(pageInfo) : ResponseMsg.error(MAINT_RECORD_QUERY_FAILED);
+    }
 
     @GetMapping("/page/type")
     public ResponseMsg<?> pageByMaintType(@RequestParam(value = "pageNum") Integer pageNum,
-                                           @RequestParam(value = "pageSize") Integer pageSize,
-                                           @RequestParam(value = "typeId") Integer typeId,
-                                           @RequestParam(value = "state", defaultValue = "1", required = false) Integer state) {
+                                          @RequestParam(value = "pageSize") Integer pageSize,
+                                          @RequestParam(value = "typeId") Integer typeId,
+                                          @RequestParam(value = "state", defaultValue = "1", required = false) Integer state) {
         PageInfo pageInfo = maintRecordService.pageByMaintType(pageNum, pageSize, typeId, state);
         return pageInfo != null ? ResponseMsg.success(pageInfo) : ResponseMsg.error(MAINT_RECORD_QUERY_FAILED);
     }
 
     @GetMapping("/page/phone")
     public ResponseMsg<?> pageByPhoneNumber(@RequestParam(value = "pageNum") Integer pageNum,
-                                          @RequestParam(value = "pageSize") Integer pageSize,
-                                          @RequestParam(value = "phoneNumber") String phoneNumber,
-                                          @RequestParam(value = "state", defaultValue = "1", required = false) Integer state) {
+                                            @RequestParam(value = "pageSize") Integer pageSize,
+                                            @RequestParam(value = "phoneNumber") String phoneNumber,
+                                            @RequestParam(value = "state", defaultValue = "1", required = false) Integer state) {
         PageInfo pageInfo = maintRecordService.pageByPhoneNumber(pageNum, pageSize, phoneNumber, state);
         return pageInfo != null ? ResponseMsg.success(pageInfo) : ResponseMsg.error(MAINT_RECORD_QUERY_FAILED);
     }
 
     @GetMapping("/page/question")
     public ResponseMsg<?> pageByQuestion(@RequestParam(value = "pageNum") Integer pageNum,
-                                            @RequestParam(value = "pageSize") Integer pageSize,
-                                            @RequestParam(value = "question") String question,
-                                            @RequestParam(value = "state", defaultValue = "1", required = false) Integer state) {
+                                         @RequestParam(value = "pageSize") Integer pageSize,
+                                         @RequestParam(value = "question") String question,
+                                         @RequestParam(value = "state", defaultValue = "1", required = false) Integer state) {
         PageInfo pageInfo = maintRecordService.pageByDescription(pageNum, pageSize, question, state);
         return pageInfo != null ? ResponseMsg.success(pageInfo) : ResponseMsg.error(MAINT_RECORD_QUERY_FAILED);
     }
 
+    @GetMapping("/page/persons-time")
+    public ResponseMsg<?> pageByTime(
+            @RequestParam(value = "pageNum") Integer pageNum,
+            @RequestParam(value = "pageSize") Integer pageSize,
+            @RequestParam(value = "startTime") LocalDateTime startTime,
+            @RequestParam(value = "endTime") LocalDateTime endTime,
+            @RequestParam(value = "userId") Integer userId,
+            @RequestParam(value = "state", defaultValue = "1", required = false) Integer state) {
+        PageInfo pageInfo = maintRecordService.pageByIdAndTime(pageNum, pageSize, startTime, endTime, userId, state);
+        return pageInfo != null ? ResponseMsg.success(pageInfo) : ResponseMsg.error(MAINT_RECORD_QUERY_FAILED);
+
+    }
 
 
     @GetMapping("/get")
@@ -218,17 +238,19 @@ public class MaintRecordController {
     }
 
     @GetMapping("/persons-month")
-    public ResponseMsg<List<MaintRecordVo>> listByMonth(@RequestParam(value = "time")LocalDateTime time,
-                                                        @RequestParam(value="userId")Integer userId,
+    public ResponseMsg<List<MaintRecordVo>> listByMonth(@RequestParam(value = "time") LocalDateTime time,
+                                                        @RequestParam(value = "userId") Integer userId,
                                                         @RequestParam(value = "state", defaultValue = "1", required = false) Integer state) {
-        return ResponseMsg.success(maintRecordService.listByIdAndMonth(time,userId, state));
+        return ResponseMsg.success(maintRecordService.listByIdAndMonth(time, userId, state));
     }
 
     @GetMapping("/persons-time")
-    public ResponseMsg<List<MaintRecordVo>> listByTime(@RequestParam(value = "startTime")LocalDateTime startTime,
-                                                       @RequestParam(value = "endTime")LocalDateTime endTime,
-                                                       @RequestParam(value="userId")Integer userId,
+    public ResponseMsg<List<MaintRecordVo>> listByTime(@RequestParam(value = "startTime") LocalDateTime startTime,
+                                                       @RequestParam(value = "endTime") LocalDateTime endTime,
+                                                       @RequestParam(value = "userId") Integer userId,
                                                        @RequestParam(value = "state", defaultValue = "1", required = false) Integer state) {
-        return ResponseMsg.success(maintRecordService.listByIdAndTime(startTime,endTime,userId, state));
+        return ResponseMsg.success(maintRecordService.listByIdAndTime(startTime, endTime, userId, state));
     }
+
+
 }
