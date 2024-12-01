@@ -11,17 +11,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserDo {
+public class PermissionDo {
     private Integer id;
-    private String username;
-    private String password;
-    private String name;
-    private Integer location;
-    private String phoneNumber;
-    private Integer startYear;
-    private Integer organizationId;
+    private String permissionName;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
     private Integer status;
-    private GroupDo group;
 }
